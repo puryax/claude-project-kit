@@ -3,22 +3,67 @@
 **2026-09-09 に、Roblox ゲーム「深層 -SHINSOU-」の制作（3週間・104セッション・
 コード 36,408 行・判断記録 241 件）から抽出して作った。**
 
-★★ このキットの中身は「ゲームの作り方」ではない。**「Claude に長期の仕事をさせて完遂させる方法」**である。★★
+★★ 中身は「ゲームの作り方」ではない。**「Claude に長期の仕事をさせて完遂させる方法」**である。★★
 Roblox 固有の話は `roblox/` に隔離してあるので、**ゲーム以外の仕事にもそのまま使える。**
 
 ---
 
-## 何から読むか
+## ★ 迷ったらここ：やりたいことから引く ★
 
-| やりたいこと | 開くファイル |
+| やりたいこと | やること |
 |---|---|
-| **新しいプロジェクトを始める**（種類を問わず） | `launch/START_NEW_PROJECT.md` |
-| **アカデミーの課題（モジュール6）を始める** | `launch/START_MODULE6.md` |
-| **オリジナルのゲームを構想から始める** | `launch/START_ORIGINAL.md` |
-| Claude との進め方だけ知りたい | `core/WORKFLOW.md` |
-| Roblox の落とし穴を調べたい | `roblox/PITFALLS.md` |
+| **新しいプロジェクトを始める**（種類を問わず） | `launch/START_NEW_PROJECT.md` を開く |
+| **アカデミーの課題（モジュール6）を始める** | `launch/START_MODULE6.md` を開く |
+| **オリジナルのゲームを構想から始める** | `launch/START_ORIGINAL.md` を開く |
+| Claude との進め方を思い出したい | `core/WORKFLOW.md` を読む |
+| Roblox で何かおかしい | `roblox/PITFALLS.md` を症状から引く |
 
-★ **迷ったら `launch/` の中から選ぶ。** ★ あそこが入口。
+★ **どの `launch/*.md` も、中身を読まずに Claude へ丸ごと渡してよい。** ★
+「`C:\Users\81708\Documents\ClaudeKit\launch\START_ORIGINAL.md` を読んで、そのとおりに進めて」
+と言えば、Claude が手順を読んで動く。**人間が読んでから貼っても、渡すだけでも、どちらでもよい。**
+
+---
+
+## ★★ スキル（`/` で呼べる手順書）★★
+
+**スキルは Claude Code の仕組みで、「この場面ではこう動け」という手順書を
+名前で呼び出せるようにしたもの。** ★ ファイルの置き場所は `ClaudeKit` の中ではなく
+**`C:\Users\81708\.claude\skills\`** ★（ユーザー全体の設定なので、
+どのフォルダで新規セッションを立ち上げても使える）。
+
+| スキル名 | いつ使うか |
+|---|---|
+| **`project-kickoff`** | ★ **新しいプロジェクトを立ち上げるとき** ★<br>CLAUDE.md と docs 7ファイルを作り、進め方を設定するところまでやる |
+| **`roblox-pitfalls`** | ★ **Roblox の作業をするとき** ★<br>Luau を書く前・Studio を調べる前・計測する前・不具合を追うときに読ませる |
+
+### ★ 名前を忘れてもよい（大事）★
+**そもそも毎回 `/` で呼ぶ必要はない。**
+スキルには「どんなときに使うか」が書いてあり、**Claude が自分で判断して勝手に読む。**
+「新しいプロジェクトを始めたい」と言えば `project-kickoff` が、
+Roblox の作業を始めれば `roblox-pitfalls` が、**呼ばなくても効く。**
+
+それでも名前で呼びたいときは：
+- 入力欄で **`/` を打つと一覧が出る**（先頭数文字で絞れる）
+- **この表を見る**（上の2つがすべて）
+- Claude に「使えるスキルを教えて」と聞く
+
+---
+
+## ★ どのファイルを誰が読むのか ★
+
+**すべてのファイルの2行目に「誰が読むか」を書いてある。** まとめると：
+
+| ファイル | 人間 | Claude |
+|---|---|---|
+| `README.md`（これ） | ★ **読む** ★ | 読まなくてよい |
+| `launch/START_*.md` | ★ **読む** ★ | 渡せば読む（そのほうが速い） |
+| `core/WORKFLOW.md` | 読むとよい | ★ **読む** ★ |
+| `roblox/SETUP.md` | 読む（手を動かす箇所がある） | ★ **読む** ★ |
+| `roblox/PITFALLS.md` | 眺める程度でよい | ★ **読む** ★ |
+| `core/CLAUDE_TEMPLATE.md` | 読まなくてよい | ★ **読む**（雛形として使う）★ |
+| `core/docs_template/*` | 読まなくてよい | ★ **読む**（コピーして埋める）★ |
+
+★ **人間が必ず読むのは README と `launch/` の3つだけ。** ★ 残りは Claude の仕事。
 
 ---
 
@@ -26,14 +71,23 @@ Roblox 固有の話は `roblox/` に隔離してあるので、**ゲーム以外
 
 ```
 ClaudeKit/
+├ README.md               ← いまここ。人間の入口
 ├ core/                   ← A層：どんなプロジェクトでも使う
-│  ├ CLAUDE_TEMPLATE.md   ← 新しいプロジェクトの CLAUDE.md の雛形
 │  ├ WORKFLOW.md          ← ★ 進め方の本体。これが一番大事 ★
+│  ├ CLAUDE_TEMPLATE.md   ← 新しいプロジェクトの CLAUDE.md の雛形
 │  └ docs_template/       ← docs 7ファイルの空テンプレ
 ├ roblox/                 ← B層：Roblox のときだけ
 │  ├ SETUP.md             ← Rojo + Studio MCP の環境構築
 │  └ PITFALLS.md          ← ★ 実測で分かった落とし穴 30 件 ★
-└ launch/                 ← 起動キット（ここが入口）
+└ launch/                 ← 起動キット（人間の入口）
+   ├ START_NEW_PROJECT.md
+   ├ START_MODULE6.md
+   └ START_ORIGINAL.md
+
+（別の場所）
+C:\Users\81708\.claude\skills\
+├ project-kickoff\SKILL.md
+└ roblox-pitfalls\SKILL.md
 ```
 
 ---
