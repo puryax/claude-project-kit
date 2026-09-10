@@ -8,6 +8,22 @@ Roblox 固有の話は `roblox/` に隔離してあるので、**ゲーム以外
 
 ---
 
+## ★ 使う前に：1つだけ用意すること ★
+
+このキットは**置き場所を選ばない**が、Claude に渡すときは**実際のパス**が要る。
+自分が置いた場所を控えておき、下の `<ClaudeKit を置いた場所>` をそこに読み替えること。
+
+```
+例）Windows: C:\Users\<自分>\Documents\ClaudeKit
+    macOS  : /Users/<自分>/ClaudeKit
+```
+
+★ **毎回打ちたくない場合**は、`<ホーム>\.claude\skills\` にスキルとして置くとよい
+（このリポジトリの `skills_example/` に雛形がある）。**そちらには実際のパスを直接書いてよい。**
+スキルは自分の手元にしか無いので、公開されない。
+
+---
+
 ## ★ 迷ったらここ：やりたいことから引く ★
 
 | やりたいこと | やること |
@@ -19,7 +35,7 @@ Roblox 固有の話は `roblox/` に隔離してあるので、**ゲーム以外
 | Roblox で何かおかしい | `roblox/PITFALLS.md` を症状から引く |
 
 ★ **どの `launch/*.md` も、中身を読まずに Claude へ丸ごと渡してよい。** ★
-「`C:\Users\81708\Documents\ClaudeKit\launch\START_ORIGINAL.md` を読んで、そのとおりに進めて」
+「`<ClaudeKit を置いた場所>\launch\START_ORIGINAL.md` を読んで、そのとおりに進めて」
 と言えば、Claude が手順を読んで動く。**人間が読んでから貼っても、渡すだけでも、どちらでもよい。**
 
 ---
@@ -28,7 +44,7 @@ Roblox 固有の話は `roblox/` に隔離してあるので、**ゲーム以外
 
 **スキルは Claude Code の仕組みで、「この場面ではこう動け」という手順書を
 名前で呼び出せるようにしたもの。** ★ ファイルの置き場所は `ClaudeKit` の中ではなく
-**`C:\Users\81708\.claude\skills\`** ★（ユーザー全体の設定なので、
+**`<ホーム>\.claude\skills\`** ★（ユーザー全体の設定なので、
 どのフォルダで新規セッションを立ち上げても使える）。
 
 | スキル名 | いつ使うか |
@@ -85,7 +101,7 @@ ClaudeKit/
    └ START_ORIGINAL.md
 
 （別の場所）
-C:\Users\81708\.claude\skills\
+<ホーム>\.claude\skills\
 ├ project-kickoff\SKILL.md
 └ roblox-pitfalls\SKILL.md
 ```

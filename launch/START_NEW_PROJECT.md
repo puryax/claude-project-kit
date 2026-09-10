@@ -20,7 +20,7 @@
 ```
 これから新しいプロジェクトを始めます。
 
-まず C:\Users\81708\Documents\ClaudeKit\core\WORKFLOW.md を読んでください。
+まず <ClaudeKit を置いた場所>\core\WORKFLOW.md を読んでください。
 そこに書いてある進め方で、このプロジェクトを進めます。
 
 <Roblox のゲームなら次の1行も足す>
