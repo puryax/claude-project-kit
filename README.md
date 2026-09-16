@@ -24,13 +24,35 @@ Roblox 固有の話は `roblox/` に隔離してあるので、**ゲーム以外
 
 ---
 
+## ★★ `launch/` の4枚の関係（ここが分かれば迷わない）★★
+
+**「人間が読む地図」が1枚と、「Claude に渡す紙」が2枚。** 地図の中から、紙を順番に渡す。
+
+```
+【人間が読む地図】   START_ORIGINAL.md（構想ゼロから）／ START_MODULE6.md（課題から）
+                          │  中から、順番に2枚を渡す
+                          ▼
+【Claude に渡す紙】  ① FOR_CHAT.md ─────────→ チャットへ …… 企画・GDD を書く
+                            │ （GDD ができたら）
+                            ▼
+                    ② START_NEW_PROJECT.md → Code へ …… 環境構築・docs・最初の1周
+                            │
+                            ▼
+                    以降は、そのプロジェクトの CLAUDE.md と docs/ で回る
+```
+
+★ **① → ② は直列。** ★ ①の出力（GDD）が②の入力になる。
+★ **GDD が既にあるなら①は飛ばして②から。** ★ ①は「作るものがまだ決まっていない」ときだけ。
+
+---
+
 ## ★ 迷ったらここ：やりたいことから引く ★
 
 | やりたいこと | やること |
 |---|---|
-| **新しいプロジェクトを始める**（種類を問わず） | `launch/START_NEW_PROJECT.md` を開く |
-| **アカデミーの課題（モジュール6）を始める** | `launch/START_MODULE6.md` を開く |
-| **オリジナルのゲームを構想から始める** | `launch/START_ORIGINAL.md` を開く |
+| **作るものがまだ決まっていない** | `launch/START_ORIGINAL.md`（地図）を開き、チャットに `FOR_CHAT.md` を渡す |
+| **GDD は手元にある。環境を作りたい** | Code に `launch/START_NEW_PROJECT.md` を渡す |
+| **アカデミーの課題を始める** | `launch/START_MODULE6.md`（地図）を開く ※モジュール6で使用済み |
 | Claude との進め方を思い出したい | `core/WORKFLOW.md` を読む |
 | Roblox で何かおかしい | `roblox/PITFALLS.md` を症状から引く |
 
